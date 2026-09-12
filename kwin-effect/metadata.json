@@ -1,0 +1,17 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "deno"
+            }
+        ],
+        "Category": "Appearance",
+        "Description": "Dims the Plasma panel brightness when idle independently of overall brightness settings to prevent OLED burn-in. Works best in HDR mode.",
+        "EnabledByDefault": false,
+        "Id": "oledpanel",
+        "License": "GPL-2.0-or-later",
+        "Name": "OLED HDR Panel Saver"
+    },
+    "X-KDE-ConfigModule": "kwin_oledpanel_config",
+    "X-KDE-Ordering": 60
+}
