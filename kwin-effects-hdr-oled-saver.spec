@@ -1,8 +1,8 @@
-Name:           kwin-panel-hdr-oled-saver-effect
+Name:           kwin-effects-hdr-oled-saver
 Version:        0.9.0
 Release:        1%{?dist}
 Summary:        Dims the Plasma panel brightness when idle to prevent OLED burn-in
-URL:            https://github.com/deno/kwin-panel-hdr-oled-saver-effect
+URL:            https://github.com/deno/kwin-effects-hdr-oled-saver
 License:        GPL-2.0-or-later
 Source0:        %{name}-%{version}.tar.gz
 

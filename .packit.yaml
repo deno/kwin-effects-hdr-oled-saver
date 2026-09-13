@@ -1,7 +1,7 @@
-# Packit configuration for kwin-panel-hdr-oled-saver-effect.
+# Packit configuration for kwin-effects-hdr-oled-saver.
 # Docs: https://packit.dev/docs/configuration
-specfile_path: kwin-panel-hdr-oled-saver-effect.spec
-upstream_package_name: kwin-panel-hdr-oled-saver-effect
+specfile_path: kwin-effects-hdr-oled-saver.spec
+upstream_package_name: kwin-effects-hdr-oled-saver
 # Release tags look like v0.9.0; {version} must match Version: in the spec.
 upstream_tag_template: v{version}
 
@@ -10,7 +10,7 @@ jobs:
 - job: copr_build
   trigger: pull_request
   owner: deno
-  project: kwin-panel-hdr-oled-saver-effect
+  project: kwin-effects-hdr-oled-saver
   targets:
   - fedora-43-x86_64
   - fedora-44-x86_64
@@ -21,7 +21,7 @@ jobs:
   trigger: commit
   branch: master
   owner: deno
-  project: kwin-panel-hdr-oled-saver-effect
+  project: kwin-effects-hdr-oled-saver
   targets:
   - fedora-43-x86_64
   - fedora-44-x86_64
@@ -31,7 +31,7 @@ jobs:
 - job: copr_build
   trigger: release
   owner: deno
-  project: kwin-panel-hdr-oled-saver-effect
+  project: kwin-effects-hdr-oled-saver
   targets:
   - fedora-43-x86_64
   - fedora-44-x86_64

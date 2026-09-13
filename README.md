@@ -25,11 +25,11 @@ Or build the RPM (preferred — clean uninstall/upgrade):
 
 ```bash
 sudo dnf install -y mock rpm-build
-git archive --format=tar.gz --prefix=kwin-panel-hdr-oled-saver-effect-0.9.0/ HEAD \
-    -o ~/rpmbuild/SOURCES/kwin-panel-hdr-oled-saver-effect-0.9.0.tar.gz
-cp kwin-panel-hdr-oled-saver-effect.spec ~/rpmbuild/SPECS/
-rpmbuild -bs ~/rpmbuild/SPECS/kwin-panel-hdr-oled-saver-effect.spec
-mock -r fedora-44-x86_64 --rebuild ~/rpmbuild/SRPMS/kwin-panel-hdr-oled-saver-effect-*.src.rpm
+git archive --format=tar.gz --prefix=kwin-effects-hdr-oled-saver-0.9.0/ HEAD \
+    -o ~/rpmbuild/SOURCES/kwin-effects-hdr-oled-saver-0.9.0.tar.gz
+cp kwin-effects-hdr-oled-saver.spec ~/rpmbuild/SPECS/
+rpmbuild -bs ~/rpmbuild/SPECS/kwin-effects-hdr-oled-saver.spec
+mock -r fedora-44-x86_64 --rebuild ~/rpmbuild/SRPMS/kwin-effects-hdr-oled-saver-*.src.rpm
 ```
 
 Then remove any manually installed copies, install the RPM, and restart
