@@ -49,7 +49,19 @@ Then install:
 sudo pacman -Sy kwin-effects-hdr-oled-saver
 ```
 
-Then restart KWin (`kwin_wayland --replace & disown`) or logout & login from the KDE desktop so the effect loads.
+### Ubuntu
+
+Support planned for Ubuntu 26.10 (requires KWin $\ge$ 6.7.0).
+
+### openSUSE Leap
+
+Support planned for Leap 16.1 (requires KWin $\ge$ 6.7.0).
+
+## Running
+
+Enable the effect in System Settings under Desktop Effects.
+
+Restart KWin (`kwin_wayland --replace & disown`) or logout & login from the KDE desktop so the effect loads.
 
 ## Screenshots
 
