@@ -6,27 +6,6 @@ upstream_package_name: kwin-effects-hdr-oled-saver
 upstream_tag_template: v{version}
 
 jobs:
-# Smoke-build every PR in COPR.
-- job: copr_build
-  trigger: pull_request
-  owner: deno
-  project: kwin-effects-hdr-oled-saver
-  targets:
-  - fedora-43-x86_64
-  - fedora-44-x86_64
-  - fedora-rawhide-x86_64
-
-# Build every push to master in COPR.
-- job: copr_build
-  trigger: commit
-  branch: master
-  owner: deno
-  project: kwin-effects-hdr-oled-saver
-  targets:
-  - fedora-43-x86_64
-  - fedora-44-x86_64
-  - fedora-rawhide-x86_64
-
 # Build a release in COPR whenever a GitHub release is published.
 - job: copr_build
   trigger: release
@@ -34,5 +13,8 @@ jobs:
   project: kwin-effects-hdr-oled-saver
   targets:
   - fedora-43-x86_64
+  - fedora-43-aarch64
   - fedora-44-x86_64
+  - fedora-44-aarch64
   - fedora-rawhide-x86_64
+  - fedora-rawhide-aarch64
