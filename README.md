@@ -4,7 +4,13 @@ Dims the Plasma panel brightness when idle independently of overall brightness s
 
 Hovering, touching, or clicking the panel restores full brightness instantly with a fast fade (unless configured to remain dimmed at all times).
 
+## Screenshots
 
+![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-dark.png#gh-dark-mode-only)
+![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-light.png#gh-light-mode-only)
+
+![Effect settings](docs/screenshots/effect-settings-dark.png#gh-dark-mode-only)
+![Effect settings](docs/screenshots/effect-settings-light.png#gh-light-mode-only)
 
 ## Install (Fedora)
 
