@@ -1,0 +1,14 @@
+# OBS SCM/CI workflow: build a versioned package for every pushed tag.
+# Guide: https://openbuildservice.org/help/manuals/obs-user-guide/cha-obs-scm-ci-workflow-integration
+# One-time setup (OBS/GitHub UIs, guide 8.1.4-8.1.5): workflow token + webhook
+# on push events, source package home:deno_/kwin-effects-hdr-oled-saver with
+# a _service file (obs_scm @PARENT_TAG@ + set_version + tar), target project
+# home:deno_:kwin-effects-hdr-oled-saver.
+release_package:
+  steps:
+    - branch_package:
+        source_project: home:deno_
+        source_package: kwin-effects-hdr-oled-saver
+        target_project: home:deno_:kwin-effects-hdr-oled-saver
+  filters:
+    event: tag_push
