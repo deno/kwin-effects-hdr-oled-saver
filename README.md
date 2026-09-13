@@ -4,29 +4,57 @@ Dims the Plasma panel brightness when idle independently of overall brightness s
 
 Hovering, touching, or clicking the panel restores full brightness instantly with a fast fade (unless configured to remain dimmed at all times).
 
+## Install
 
-
-## Install (Fedora)
-
-```bash
-sudo dnf install -y kwin-devel extra-cmake-modules libepoxy-devel libdrm-devel kf6-kcmutils-devel
-cmake -S kwin-effect -B kwin-effect/build -G Ninja \
-    -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_PLUGINDIR=$(rpm --eval "%{_qt6_plugindir}")
-sudo cmake --install kwin-effect/build --prefix /usr
-```
-
-Or build the RPM (preferred — clean uninstall/upgrade):
+### Fedora
 
 ```bash
-sudo dnf install -y mock rpm-build
-git archive --format=tar.gz --prefix=kwin-panel-hdr-oled-saver-effect-0.9.0/ HEAD \
-    -o ~/rpmbuild/SOURCES/kwin-panel-hdr-oled-saver-effect-0.9.0.tar.gz
-cp kwin-panel-hdr-oled-saver-effect.spec ~/rpmbuild/SPECS/
-rpmbuild -bs ~/rpmbuild/SPECS/kwin-panel-hdr-oled-saver-effect.spec
-mock -r fedora-44-x86_64 --rebuild ~/rpmbuild/SRPMS/kwin-panel-hdr-oled-saver-effect-*.src.rpm
+sudo dnf copr enable deno/kwin-effects-hdr-oled-saver
+sudo dnf install -y kwin-effects-hdr-oled-saver
 ```
 
-Then remove any manually installed copies, install the RPM, and restart
-KWin (`kwin_wayland --replace & disown`). Code changes always need the
-compositor restart — hot unload/load reuses the old mapped library.
+### openSUSE Tumbleweed / Slowroll
 
+```bash
+# Tumbleweed
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/deno_:/kwin-effects-hdr-oled-saver/openSUSE_Tumbleweed/home:deno_:kwin-effects-hdr-oled-saver.repo
+# Slowroll
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/deno_:/kwin-effects-hdr-oled-saver/openSUSE_Slowroll/home:deno_:kwin-effects-hdr-oled-saver.repo
+
+sudo zypper refresh
+sudo zypper install kwin-effects-hdr-oled-saver
+```
+### Arch Linux
+
+Import and trust the repository key:
+
+```bash
+# 1. Fetch and add the OBS repo key to pacman's keyring
+curl -fsSL https://download.opensuse.org/repositories/home:/deno_:/kwin-effects-hdr-oled-saver/Arch_Extra/x86_64/home_deno__kwin-effects-hdr-oled-saver_Arch_Extra.key | sudo pacman-key --add -
+
+# 2. Locally sign (trust) the key
+sudo pacman-key --lsign-key $(curl -fsSL https://download.opensuse.org/repositories/home:/deno_:/kwin-effects-hdr-oled-saver/Arch_Extra/x86_64/home_deno__kwin-effects-hdr-oled-saver_Arch_Extra.key | gpg --show-keys --with-colons | awk -F: '$1=="pub"{print $5}')
+```
+
+Add the repository to `/etc/pacman.conf`:
+
+```ini
+[home_deno__kwin-effects-hdr-oled-saver_Arch_Extra]
+Server = https://download.opensuse.org/repositories/home:/deno_:/kwin-effects-hdr-oled-saver/Arch_Extra/$arch
+```
+
+Then install:
+
+```bash
+sudo pacman -Sy kwin-effects-hdr-oled-saver
+```
+
+Then restart KWin (`kwin_wayland --replace & disown`) or logout & login from the KDE desktop so the effect loads.
+
+## Screenshots
+
+![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-dark.png#gh-dark-mode-only)
+![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-light.png#gh-light-mode-only)
+
+![Effect settings](docs/screenshots/effect-settings-dark.png#gh-dark-mode-only)
+![Effect settings](docs/screenshots/effect-settings-light.png#gh-light-mode-only)
