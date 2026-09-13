@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "deno"
+            }
+        ],
+        "Category": "Appearance",
+        "Description": "Configure the OLED HDR Panel Saver effect",
+        "EnabledByDefault": true,
+        "Id": "kwin_oledpanel_config",
+        "License": "GPL-2.0-or-later",
+        "Name": "OLED HDR Panel Saver"
+    }
+}
