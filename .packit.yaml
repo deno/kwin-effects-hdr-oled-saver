@@ -11,11 +11,10 @@ jobs:
   trigger: pull_request
   owner: deno
   project: kwin-panel-hdr-oled-saver-effect
-  metadata:
-    targets:
-    - fedora-43-x86_64
-    - fedora-44-x86_64
-    - fedora-rawhide-x86_64
+  targets:
+  - fedora-43-x86_64
+  - fedora-44-x86_64
+  - fedora-rawhide-x86_64
 
 # Build every push to master in COPR.
 - job: copr_build
@@ -23,19 +22,17 @@ jobs:
   branch: master
   owner: deno
   project: kwin-panel-hdr-oled-saver-effect
-  metadata:
-    targets:
-    - fedora-43-x86_64
-    - fedora-44-x86_64
-    - fedora-rawhide-x86_64
+  targets:
+  - fedora-43-x86_64
+  - fedora-44-x86_64
+  - fedora-rawhide-x86_64
 
 # Build a release in COPR whenever a GitHub release is published.
 - job: copr_build
   trigger: release
   owner: deno
   project: kwin-panel-hdr-oled-saver-effect
-  metadata:
-    targets:
-    - fedora-43-x86_64
-    - fedora-44-x86_64
-    - fedora-rawhide-x86_64
+  targets:
+  - fedora-43-x86_64
+  - fedora-44-x86_64
+  - fedora-rawhide-x86_64
