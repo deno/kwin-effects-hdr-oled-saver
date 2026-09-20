@@ -2,7 +2,7 @@
 # Docs: https://packit.dev/docs/configuration
 specfile_path: kwin-effects-hdr-oled-saver.spec
 upstream_package_name: kwin-effects-hdr-oled-saver
-# Release tags look like v0.9.0; {version} must match Version: in the spec.
+# Release tags use v{version}; {version} must match Version: in the spec.
 upstream_tag_template: v{version}
 
 jobs:

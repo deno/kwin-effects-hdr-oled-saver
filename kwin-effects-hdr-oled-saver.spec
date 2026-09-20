@@ -1,6 +1,6 @@
 Name:           kwin-effects-hdr-oled-saver
-Version:        0.9.0
-Release:        2%{?dist}
+Version:        0.9.1
+Release:        1%{?dist}
 Summary:        Dims the Plasma panel brightness when idle to prevent OLED burn-in
 URL:            https://github.com/deno/kwin-effects-hdr-oled-saver
 License:        GPL-2.0-or-later
@@ -74,6 +74,8 @@ DESTDIR=%{buildroot} cmake --install %{_builddir}/build
 %doc README.md
 
 %changelog
+* Sun Sep 20 2026 deno - 0.9.1-1
+- Refactor: event-driven panel dimming architecture and KDE-standard generated settings.
 * Sun Sep 13 2026 deno - 0.9.0-2
 - Portable dependencies (cmake()/pkgconfig() provides, /usr/bin/ninja) for SUSE builds
 * Sun Sep 13 2026 deno - 0.9.0-1
