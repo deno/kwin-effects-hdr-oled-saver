@@ -1,0 +1,8 @@
+File=oledpanel.kcfg
+ClassName=OledPanelSettings
+NameSpace=KWin
+Inherits=KCoreConfigSkeleton
+Singleton=false
+Mutators=true
+DefaultValueGetters=true
+ItemAccessors=true

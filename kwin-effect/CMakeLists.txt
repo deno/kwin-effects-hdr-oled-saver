@@ -11,17 +11,25 @@ ecm_setup_qtplugin_macro_names()
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 find_package(Qt6 REQUIRED COMPONENTS Core DBus Gui Widgets)
-find_package(KWin REQUIRED)
+find_package(KWin 6.7 REQUIRED)
 find_package(KF6 REQUIRED COMPONENTS Config CoreAddons I18n KCMUtils)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+add_library(oledpanel_settings STATIC)
+set_target_properties(oledpanel_settings PROPERTIES POSITION_INDEPENDENT_CODE ON)
+kconfig_add_kcfg_files(oledpanel_settings oledpanelsettings.kcfgc)
+target_include_directories(oledpanel_settings PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+target_link_libraries(oledpanel_settings PUBLIC KF6::ConfigCore)
+
 add_library(oledpanel MODULE oledpanel.cpp)
+set_property(TARGET oledpanel APPEND PROPERTY AUTOMOC_MACRO_NAMES KWIN_EFFECT_FACTORY)
 target_include_directories(oledpanel PRIVATE /usr/include/kwin)
 target_link_libraries(oledpanel PRIVATE
     KWin::kwin
+    oledpanel_settings
     KF6::ConfigCore
     KF6::CoreAddons
     Qt6::Core
@@ -32,6 +40,7 @@ target_link_libraries(oledpanel PRIVATE
 install(TARGETS oledpanel DESTINATION ${KDE_INSTALL_PLUGINDIR}/kwin/effects/plugins/)
 add_library(kwin_oledpanel_config MODULE config.cpp config.h)
 target_link_libraries(kwin_oledpanel_config PRIVATE
+    oledpanel_settings
     KF6::ConfigCore
     KF6::CoreAddons
     KF6::I18n
@@ -41,4 +50,5 @@ target_link_libraries(kwin_oledpanel_config PRIVATE
     Qt6::Gui
     Qt6::Widgets
 )
+
 install(TARGETS kwin_oledpanel_config DESTINATION ${KDE_INSTALL_PLUGINDIR}/kwin/effects/configs/)
