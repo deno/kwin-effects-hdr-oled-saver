@@ -51,4 +51,18 @@ target_link_libraries(kwin_oledpanel_config PRIVATE
     Qt6::Widgets
 )
 
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(oledpanel_transition_test tests/panelstate_test.cpp)
+    target_include_directories(oledpanel_transition_test PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        /usr/include/kwin
+    )
+    target_link_libraries(oledpanel_transition_test PRIVATE
+        KWin::kwin
+        oledpanel_settings
+        Qt6::Core
+    )
+    add_test(NAME oledpanel_transition_test COMMAND oledpanel_transition_test)
+endif()
 install(TARGETS kwin_oledpanel_config DESTINATION ${KDE_INSTALL_PLUGINDIR}/kwin/effects/configs/)

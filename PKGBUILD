@@ -7,7 +7,7 @@ pkgdesc="Dims the Plasma panel brightness when idle to prevent OLED burn-in"
 arch=('x86_64' 'aarch64')
 url="https://github.com/deno/kwin-effects-hdr-oled-saver"
 license=('GPL-2.0-or-later')
-depends=('kwin' 'qt6-base' 'qt6-declarative' 'libepoxy' 'libdrm')
+depends=('kwin>=6.7' 'qt6-base' 'qt6-declarative' 'libepoxy' 'libdrm')
 makedepends=('cmake' 'extra-cmake-modules' 'ninja' 'vulkan-headers' 'kcmutils' 'kconfig' 'kcoreaddons' 'ki18n' 'kwindowsystem' 'wayland')
 source=("${pkgname}-${pkgver}.tar.gz")
 sha256sums=('SKIP')

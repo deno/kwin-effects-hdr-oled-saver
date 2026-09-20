@@ -18,7 +18,7 @@ BuildRequires:  ninja
 BuildRequires:  ninja-build
 %endif
 BuildRequires:  cmake
-BuildRequires:  cmake(KWin)
+BuildRequires:  cmake(KWin) >= 6.7
 BuildRequires:  cmake(Qt6Core)
 BuildRequires:  cmake(Qt6Qml)
 BuildRequires:  cmake(Qt6Quick)
@@ -35,9 +35,9 @@ BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  vulkan-headers
 BuildRequires:  wayland-devel
 %if 0%{?suse_version}
-Requires:       kwin6
+Requires:       kwin6 >= 6.7
 %else
-Requires:       kwin%{?_isa}
+Requires:       kwin%{?_isa} >= 6.7
 %endif
 
 %description
