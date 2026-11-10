@@ -1,8 +1,8 @@
 # Maintainer: deno <deno@users.noreply.github.com>
 
 pkgname=kwin-effects-hdr-oled-saver
-pkgver=0.9.2
-pkgrel=2
+pkgver=0.9.3
+pkgrel=1
 pkgdesc="Dims the Plasma panel brightness when idle to prevent OLED burn-in"
 arch=('x86_64' 'aarch64')
 url="https://github.com/deno/kwin-effects-hdr-oled-saver"
