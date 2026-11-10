@@ -1,5 +1,5 @@
 Name:           kwin-effects-hdr-oled-saver
-Version:        0.9.1
+Version:        0.9.2
 Release:        1%{?dist}
 Summary:        Dims the Plasma panel brightness when idle to prevent OLED burn-in
 URL:            https://github.com/deno/kwin-effects-hdr-oled-saver
@@ -34,10 +34,11 @@ BuildRequires:  libepoxy-devel
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  vulkan-headers
 BuildRequires:  wayland-devel
+# KWin's effect factory IID includes the exact version used to build the plugin.
 %if 0%{?suse_version}
-Requires:       kwin6 >= 6.7
+Requires:       kwin6 = %{pkg_version cmake(KWin)}
 %else
-Requires:       kwin%{?_isa} >= 6.7
+Requires:       kwin%{?_isa} = %{_kwin_version}
 %endif
 
 %description
@@ -63,6 +64,9 @@ cmake --build %{_builddir}/build
 %install
 DESTDIR=%{buildroot} cmake --install %{_builddir}/build
 
+%check
+ctest --test-dir %{_builddir}/build --output-on-failure
+
 %files
 %dir %{plugindir}/kwin
 %dir %{plugindir}/kwin/effects
@@ -74,6 +78,10 @@ DESTDIR=%{buildroot} cmake --install %{_builddir}/build
 %doc README.md
 
 %changelog
+* Tue Nov 10 2026 deno - 0.9.2-1
+- Fix KWin 6.8 painting compatibility while retaining KWin 6.7 support.
+- Require the exact KWin build version for Fedora and openSUSE RPMs.
+- Run the existing panel transition tests during RPM builds.
 * Sun Sep 20 2026 deno - 0.9.1-1
 - Refactor: event-driven panel dimming architecture and KDE-standard generated settings.
 * Sun Sep 13 2026 deno - 0.9.0-2
