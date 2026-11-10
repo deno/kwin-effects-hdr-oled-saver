@@ -6,7 +6,7 @@ Hovering, touching, or clicking the panel restores full brightness instantly wit
 
 Requires KWin 6.7 or newer, including support for the KWin 6.8 painting API.
 
-Fedora and openSUSE RPMs require the exact KWin version used to build the effect.
+Fedora, openSUSE and Arch packages require the exact KWin version used to build the effect.
 A KWin update may be held until a compatible rebuild is available.
 
 ## Install
