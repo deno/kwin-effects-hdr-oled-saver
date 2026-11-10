@@ -4,6 +4,8 @@ Dims the Plasma panel brightness when idle independently of overall brightness s
 
 Hovering, touching, or clicking the panel restores full brightness instantly with a fast fade (unless configured to remain dimmed at all times).
 
+Requires KWin 6.7 or newer, including support for the KWin 6.8 painting API.
+
 ## Install
 
 ### Fedora

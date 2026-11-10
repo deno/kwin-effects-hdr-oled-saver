@@ -75,7 +75,9 @@ public:
     void reconfigure(ReconfigureFlags flags) override;
     void prePaintScreen(ScreenPrePaintData &data) override;
     void postPaintScreen() override;
-    void paintWindow(const RenderTarget &renderTarget, const RenderViewport &viewport, EffectWindow *w, int mask, const Region &deviceRegion, WindowPaintData &data) override;
+    // KWin 6.8 changed the painting result from void to bool.
+    auto paintWindow(const RenderTarget &renderTarget, const RenderViewport &viewport, EffectWindow *w, int mask, const Region &deviceRegion, WindowPaintData &data)
+        -> decltype(Effect::paintWindow(renderTarget, viewport, w, mask, deviceRegion, data)) override;
     bool isActive() const override;
     int requestedEffectChainPosition() const override;
 

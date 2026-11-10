@@ -354,9 +354,10 @@ void OledPanelEffect::postPaintScreen()
     effects->postPaintScreen();
 }
 
-void OledPanelEffect::paintWindow(const RenderTarget &renderTarget, const RenderViewport &viewport,
-                                  EffectWindow *w, int mask, const Region &deviceRegion,
-                                  WindowPaintData &data)
+auto OledPanelEffect::paintWindow(const RenderTarget &renderTarget, const RenderViewport &viewport,
+                                EffectWindow *w, int mask, const Region &deviceRegion,
+                                WindowPaintData &data)
+    -> decltype(Effect::paintWindow(renderTarget, viewport, w, mask, deviceRegion, data))
 {
     const auto it = m_panels.constFind(w);
     if (it != m_panels.cend()) {
@@ -365,7 +366,7 @@ void OledPanelEffect::paintWindow(const RenderTarget &renderTarget, const Render
             data.multiplyBrightness(brightness);
         }
     }
-    effects->paintWindow(renderTarget, viewport, w, mask, deviceRegion, data);
+    return effects->paintWindow(renderTarget, viewport, w, mask, deviceRegion, data);
 }
 
 bool OledPanelEffect::isActive() const
