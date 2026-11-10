@@ -2,8 +2,8 @@
 # Guide: https://openbuildservice.org/help/manuals/obs-user-guide/cha-obs-scm-ci-workflow-integration
 # One-time setup (OBS/GitHub UIs, guide 8.1.4-8.1.5): workflow token + webhook
 # on push events, source package home:deno_/kwin-effects-hdr-oled-saver with
-# a _service file (obs_scm @PARENT_TAG@ + set_version + tar), target project
-# home:deno_:kwin-effects-hdr-oled-saver.
+# a _service file (template: .obs/_service), target project
+# home:deno_:kwin-effects-hdr-oled-saver (metadata: .obs/_meta).
 release_package:
   steps:
     - branch_package:

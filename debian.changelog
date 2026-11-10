@@ -1,0 +1,11 @@
+kwin-effects-hdr-oled-saver (0.9.4-1) stonking; urgency=medium
+
+  * Initial Debian packaging for Ubuntu 26.10 (Stonking).
+  * Install the effect and its configuration module into the multiarch
+    Qt 6 plugin directory used by KWin.
+  * Pin the runtime KWin dependency to the exact kwin-dev version captured
+    when the plugin is compiled, so the KWin effect plugin ABI cannot
+    silently mismatch, and keep that build-tree snapshot when repackaging.
+  * Build with Ninja and run the upstream CTest suite through dh_auto_test.
+
+ -- deno <deno@users.noreply.github.com>  Tue, 10 Nov 2026 12:00:00 +0000

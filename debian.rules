@@ -1,0 +1,44 @@
+#!/usr/bin/make -f
+
+# debhelper compatibility level is declared by debhelper-compat (= 13) in
+# debian/control.
+
+include /usr/share/dpkg/default.mk
+
+# KWin's effect plugin factory IID contains the exact KWin version whose
+# headers compiled the plugin, so the plugin only loads in a matching KWin.
+# Snapshot the kwin-dev version after a successful build and preserve that
+# value when repackaging; dh_gencontrol must not query the package database.
+BUILD_DIR := obj-$(DEB_HOST_GNU_TYPE)
+KWIN_VERSION_FILE := $(BUILD_DIR)/kwin-version
+
+AUTO_FLAGS := --buildsystem=cmake+ninja --builddirectory=$(BUILD_DIR) \
+              --sourcedir=kwin-effect
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure $(AUTO_FLAGS) -- \
+		-DBUILD_TESTING=ON \
+		-DKDE_INSTALL_PLUGINDIR=/usr/lib/$(DEB_HOST_MULTIARCH)/qt6/plugins
+
+override_dh_auto_build:
+	dh_auto_build $(AUTO_FLAGS)
+	dpkg-query -W -f='$${Version}\n' kwin-dev > "$(KWIN_VERSION_FILE)"
+
+override_dh_auto_test:
+	dh_auto_test $(AUTO_FLAGS)
+
+override_dh_auto_install:
+	dh_auto_install $(AUTO_FLAGS) --destdir=debian/kwin-effects-hdr-oled-saver
+
+override_dh_auto_clean:
+	dh_auto_clean $(AUTO_FLAGS)
+
+override_dh_gencontrol:
+	@test -s "$(KWIN_VERSION_FILE)" || { \
+		echo "error: $(KWIN_VERSION_FILE) is missing; refusing to package without the KWin ABI recorded during compilation" >&2; \
+		exit 1; \
+	}
+	dh_gencontrol -- -Vkwin:Version=$$(cat "$(KWIN_VERSION_FILE)")

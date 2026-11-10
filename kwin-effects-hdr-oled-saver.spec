@@ -1,5 +1,5 @@
 Name:           kwin-effects-hdr-oled-saver
-Version:        0.9.3
+Version:        0.9.4
 Release:        1%{?dist}
 Summary:        Dims the Plasma panel brightness when idle to prevent OLED burn-in
 URL:            https://github.com/deno/kwin-effects-hdr-oled-saver
@@ -78,6 +78,9 @@ ctest --test-dir %{_builddir}/build --output-on-failure
 %doc README.md
 
 %changelog
+* Tue Nov 10 2026 deno - 0.9.4-1
+- Add Ubuntu 26.10 Debian packaging with an exact build-time KWin ABI requirement.
+- Include Debian recipes in the OBS release pipeline.
 * Tue Nov 10 2026 deno - 0.9.3-1
 - Pin Arch packages to the KWin version recorded during compilation.
 - Preserve the ABI requirement when repackaging without recompiling.

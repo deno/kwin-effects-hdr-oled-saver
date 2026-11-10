@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<services>
+  <service name="obs_scm">
+    <param name="versionformat">@PARENT_TAG@</param>
+    <param name="versionrewrite-pattern">v(.*)</param>
+    <param name="versionrewrite-replacement">\1</param>
+    <param name="url">https://github.com/deno/kwin-effects-hdr-oled-saver.git</param>
+    <param name="scm">git</param>
+    <param name="revision">@PARENT_TAG@</param>
+    <param name="extract">kwin-effects-hdr-oled-saver.spec</param>
+    <param name="extract">PKGBUILD</param>
+    <param name="extract">kwin-effects-hdr-oled-saver.dsc</param>
+    <param name="extract">debian.*</param>
+  </service>
+  <!-- set_version turns any Debian version containing "-" into "<tag>-0".
+       Restrict it to the RPM and Arch recipes so the committed dsc and
+       debian.changelog keep the Debian revision (-1). -->
+  <service name="set_version">
+    <param name="file">kwin-effects-hdr-oled-saver.spec</param>
+    <param name="file">PKGBUILD</param>
+  </service>
+  <service name="tar" mode="buildtime"/>
+  <service name="recompress" mode="buildtime">
+    <param name="file">*.tar</param>
+    <param name="compression">gz</param>
+  </service>
+</services>

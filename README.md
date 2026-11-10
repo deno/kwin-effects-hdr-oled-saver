@@ -6,7 +6,7 @@ Hovering, touching, or clicking the panel restores full brightness instantly wit
 
 Requires KWin 6.7 or newer, including support for the KWin 6.8 painting API.
 
-Fedora, openSUSE and Arch packages require the exact KWin version used to build the effect.
+Fedora, openSUSE, Arch and Ubuntu packages require the exact KWin version used to build the effect.
 A KWin update may be held until a compatible rebuild is available.
 
 ## Install
@@ -56,7 +56,29 @@ sudo pacman -Sy kwin-effects-hdr-oled-saver
 
 ### Ubuntu
 
-Support planned for Ubuntu 26.10 (requires KWin $\ge$ 6.7.0).
+Ubuntu 26.10 (including Kubuntu) has the required KWin version. Debian packaging
+is available for building locally:
+
+```bash
+sudo apt install build-essential
+sudo apt-get build-dep ./kwin-effects-hdr-oled-saver.dsc
+mkdir -p debian/source
+for file in debian.*; do cp "$file" "debian/${file#debian.}"; done
+chmod +x debian/rules
+printf '3.0 (quilt)\n' > debian/source/format
+dpkg-buildpackage -b -us -uc
+sudo apt install ../kwin-effects-hdr-oled-saver_*.deb
+```
+
+Run these commands from a checkout or extracted release archive. The package
+pins the complete KWin version used for compilation, including Ubuntu's epoch
+and packaging revision, and preserves that dependency when repackaging.
+
+Public Ubuntu APT packages are not available yet: OBS's `Ubuntu:26.10`
+definition currently downloads Ubuntu 26.04 (`resolute`) instead of 26.10
+(`stonking`). The Ubuntu repository is disabled in `.obs/_meta` until OBS
+administrators correct the archive and build-root configuration. Once enabled,
+OBS dependency rebuilds receive an increased Debian package revision.
 
 ### openSUSE Leap
 
