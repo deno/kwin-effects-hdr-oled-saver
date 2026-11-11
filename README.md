@@ -56,8 +56,8 @@ sudo pacman -Sy kwin-effects-hdr-oled-saver
 
 ### Ubuntu
 
-Ubuntu 26.10 (including Kubuntu) packages are built on
-[Launchpad](https://launchpad.net/~denopl/+archive/ubuntu/kwin-effects-hdr-oled-saver):
+Ubuntu 26.10 (including Kubuntu) packages are built for amd64, arm64, and
+amd64v3 on [Launchpad](https://launchpad.net/~denopl/+archive/ubuntu/kwin-effects-hdr-oled-saver):
 
 ```bash
 sudo add-apt-repository ppa:denopl/kwin-effects-hdr-oled-saver
