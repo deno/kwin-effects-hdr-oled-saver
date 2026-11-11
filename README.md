@@ -56,29 +56,44 @@ sudo pacman -Sy kwin-effects-hdr-oled-saver
 
 ### Ubuntu
 
-Ubuntu 26.10 (including Kubuntu) has the required KWin version. Debian packaging
-is available for building locally:
+Ubuntu 26.10 (including Kubuntu) packages are built on
+[Launchpad](https://launchpad.net/~denopl/+archive/ubuntu/kwin-effects-hdr-oled-saver):
+
+```bash
+sudo add-apt-repository ppa:denopl/kwin-effects-hdr-oled-saver
+sudo apt update
+sudo apt install kwin-effects-hdr-oled-saver
+```
+
+To build locally instead, run these commands from a checkout or extracted release
+archive:
 
 ```bash
 sudo apt install build-essential
-sudo apt-get build-dep ./kwin-effects-hdr-oled-saver.dsc
-mkdir -p debian/source
-for file in debian.*; do cp "$file" "debian/${file#debian.}"; done
-chmod +x debian/rules
-printf '3.0 (quilt)\n' > debian/source/format
+sudo apt-get build-dep .
 dpkg-buildpackage -b -us -uc
 sudo apt install ../kwin-effects-hdr-oled-saver_*.deb
 ```
 
-Run these commands from a checkout or extracted release archive. The package
+The package
 pins the complete KWin version used for compilation, including Ubuntu's epoch
 and packaging revision, and preserves that dependency when repackaging.
 
-Public Ubuntu APT packages are not available yet: OBS's `Ubuntu:26.10`
-definition currently downloads Ubuntu 26.04 (`resolute`) instead of 26.10
-(`stonking`). The Ubuntu repository is disabled in `.obs/_meta` until OBS
-administrators correct the archive and build-root configuration. Once enabled,
-OBS dependency rebuilds receive an increased Debian package revision.
+Ubuntu is no longer built on OBS. Git tags matching `vMAJOR.MINOR.PATCH` trigger
+`.github/workflows/launchpad.yml`, which uploads signed source packages to the PPA
+for Ubuntu 26.10 (`stonking`). Launchpad compiles the binary packages.
+
+PPA packages must be rebuilt when Ubuntu updates KWin; Launchpad does not do this
+automatically. Run the workflow manually for the existing release tag with a
+higher PPA revision:
+
+```bash
+gh workflow run launchpad.yml -f tag=v0.9.4 -f revision=2
+```
+
+Use a new revision for every upload. Signing uses the repository secrets
+`LAUNCHPAD_GPG_PRIVATE_KEY` and `LAUNCHPAD_GPG_PASSPHRASE`, plus the repository
+variable `LAUNCHPAD_GPG_FINGERPRINT`.
 
 ### openSUSE Leap
 

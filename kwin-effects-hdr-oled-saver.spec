@@ -80,7 +80,7 @@ ctest --test-dir %{_builddir}/build --output-on-failure
 %changelog
 * Tue Nov 10 2026 deno - 0.9.4-1
 - Add Ubuntu 26.10 Debian packaging with an exact build-time KWin ABI requirement.
-- Include Debian recipes in the OBS release pipeline.
+- Publish Ubuntu source packages through Launchpad instead of OBS.
 * Tue Nov 10 2026 deno - 0.9.3-1
 - Pin Arch packages to the KWin version recorded during compilation.
 - Preserve the ABI requirement when repackaging without recompiling.

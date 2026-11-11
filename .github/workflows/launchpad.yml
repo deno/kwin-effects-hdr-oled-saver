@@ -1,0 +1,229 @@
+# Source-only Ubuntu PPA uploads for kwin-effects-hdr-oled-saver.
+#
+# A stable release tag (vN.N.N) is turned into an unsigned 3.0 (quilt) source
+# package, signed with the project signing key, and uploaded to Launchpad.
+# Package rebuilds of an existing tag are started manually with a higher
+# revision number: Launchpad versions are immutable, so the revision must
+# increase for every upload of the same tag. Never move or retag a release.
+#
+# Required repository configuration:
+#   secret   LAUNCHPAD_GPG_PRIVATE_KEY  ASCII-armored, passphrase-protected key
+#   secret   LAUNCHPAD_GPG_PASSPHRASE
+#   variable LAUNCHPAD_GPG_FINGERPRINT  full fingerprint of the primary key
+#
+# The first production upload must be the v0.9.4 or later release tag that
+# contains scripts/build-ppa-source.sh; older tags do not carry that script.
+
+name: Ubuntu PPA
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to upload (stable vN.N.N)'
+        required: true
+        type: string
+      revision:
+        description: 'PPA revision; increase it for every rebuild of the same tag'
+        required: true
+        default: '1'
+        type: string
+
+permissions:
+  contents: read
+
+# Queue uploads for the same tag instead of cancelling an upload in flight.
+concurrency:
+  group: launchpad-ppa-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  upload-source:
+    name: Sign and upload source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.deleted == false }}
+    steps:
+      - name: Validate release tag and revision
+        id: release
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+          PPA_REVISION: ${{ inputs.revision || '1' }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::The release tag must be a stable vN.N.N tag."
+            exit 1
+          fi
+          if [[ ! "$PPA_REVISION" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::The PPA revision must be a positive integer."
+            exit 1
+          fi
+
+          {
+            echo "tag=$RELEASE_TAG"
+            echo "revision=$PPA_REVISION"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "RELEASE_TAG=$RELEASE_TAG"
+            echo "PPA_REVISION=$PPA_REVISION"
+            echo "PPA_VERSION=${RELEASE_TAG#v}"
+          } >> "$GITHUB_ENV"
+
+      - name: Check out release tag
+        uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ steps.release.outputs.tag }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Install packaging tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends \
+            dpkg-dev devscripts dput gnupg
+
+      # A revision rebuild reuses the same tag, so the upstream source and the
+      # .orig.tar.gz stay unchanged; only PPA_REVISION advances the Debian
+      # version.
+      - name: Build unsigned source package
+        run: |
+          set -euo pipefail
+          bash scripts/build-ppa-source.sh \
+            "$PPA_VERSION" "$PPA_REVISION" "$RUNNER_TEMP/ppa-source"
+
+      - name: Import PPA signing key
+        env:
+          LAUNCHPAD_GPG_PRIVATE_KEY: ${{ secrets.LAUNCHPAD_GPG_PRIVATE_KEY }}
+          LAUNCHPAD_GPG_FINGERPRINT: ${{ vars.LAUNCHPAD_GPG_FINGERPRINT }}
+        run: |
+          set -euo pipefail
+          umask 077
+
+          gnupg_home="$RUNNER_TEMP/gnupg"
+          key_file="$RUNNER_TEMP/launchpad-key.asc"
+          install -d -m 700 "$gnupg_home"
+          chmod 700 "$gnupg_home"
+          trap 'rm -f -- "$key_file"' EXIT
+
+          : > "$key_file"
+          chmod 600 "$key_file"
+          printf '%s\n' "$LAUNCHPAD_GPG_PRIVATE_KEY" > "$key_file"
+          unset LAUNCHPAD_GPG_PRIVATE_KEY
+
+          GNUPGHOME="$gnupg_home" gpg --batch --no-tty --import "$key_file"
+          rm -f -- "$key_file"
+
+          expected="$(printf '%s' "$LAUNCHPAD_GPG_FINGERPRINT" \
+            | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]')"
+          if [[ ! "$expected" =~ ^([0-9A-F]{40}|[0-9A-F]{64})$ ]]; then
+            echo "::error::LAUNCHPAD_GPG_FINGERPRINT must be a full 40- or 64-hex-digit fingerprint."
+            exit 1
+          fi
+
+          actual="$(GNUPGHOME="$gnupg_home" gpg --batch --with-colons \
+            --list-secret-keys "$expected" \
+            | awk -F: '$1 == "fpr" { print $10; exit }')"
+          if [[ "$actual" != "$expected" ]]; then
+            echo "::error::The imported keyring does not contain the expected primary signing key."
+            exit 1
+          fi
+
+          {
+            echo "GNUPGHOME=$gnupg_home"
+            echo "SIGNING_FINGERPRINT=$actual"
+          } >> "$GITHUB_ENV"
+
+      - name: Sign source package
+        id: sign
+        env:
+          LAUNCHPAD_GPG_PASSPHRASE: ${{ secrets.LAUNCHPAD_GPG_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          umask 077
+
+          mapfile -t changes_files < <(
+            find "$RUNNER_TEMP/ppa-source" -maxdepth 1 -type f \
+              -name '*_source.changes' -print
+          )
+          if [[ ${#changes_files[@]} -ne 1 ]]; then
+            echo "::error::Expected exactly one *_source.changes file in the source output directory."
+            exit 1
+          fi
+          changes_file="${changes_files[0]}"
+
+          signer_dir="$RUNNER_TEMP/ppa-signer"
+          signer="$signer_dir/gpg"
+          passphrase_file="$RUNNER_TEMP/launchpad-passphrase"
+          install -d -m 700 "$signer_dir"
+          chmod 700 "$signer_dir"
+          trap 'rm -f -- "$passphrase_file" "$signer"; rmdir -- "$signer_dir" 2>/dev/null || true' EXIT
+
+          : > "$passphrase_file"
+          chmod 600 "$passphrase_file"
+          printf '%s' "$LAUNCHPAD_GPG_PASSPHRASE" > "$passphrase_file"
+          unset LAUNCHPAD_GPG_PASSPHRASE
+
+          # debsign invokes this wrapper; only the protected passphrase file is
+          # named on the command line, never the passphrase itself.
+          cat > "$signer" <<'WRAPPER'
+          #!/bin/sh
+          set -eu
+          : "${GPG_PASSPHRASE_FILE:?GPG_PASSPHRASE_FILE is not set}"
+          exec /usr/bin/gpg --batch --yes --no-tty --pinentry-mode loopback \
+            --passphrase-file "$GPG_PASSPHRASE_FILE" "$@"
+          WRAPPER
+          chmod 700 "$signer"
+
+          export GPG_PASSPHRASE_FILE="$passphrase_file"
+          debsign --no-conf --re-sign \
+            -k"$SIGNING_FINGERPRINT" \
+            -p"$signer" \
+            "$changes_file"
+
+      - name: Upload signed source to Launchpad
+        run: |
+          set -euo pipefail
+
+          mapfile -t changes_files < <(
+            find "$RUNNER_TEMP/ppa-source" -maxdepth 1 -type f \
+              -name '*_source.changes' -print
+          )
+          if [[ ${#changes_files[@]} -ne 1 ]]; then
+            echo "::error::Expected exactly one signed *_source.changes file."
+            exit 1
+          fi
+
+          # Do not force an upload: Launchpad rejects a version that already
+          # exists. Rebuild a tag only with a higher workflow_dispatch revision.
+          dput ppa:denopl/kwin-effects-hdr-oled-saver "${changes_files[0]}"
+
+      - name: Save signed source artifacts
+        if: ${{ always() && steps.sign.outcome == 'success' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ppa-source-${{ steps.release.outputs.tag }}-ppa${{ steps.release.outputs.revision }}
+          path: |
+            ${{ runner.temp }}/ppa-source/*.changes
+            ${{ runner.temp }}/ppa-source/*.dsc
+            ${{ runner.temp }}/ppa-source/*.buildinfo
+            ${{ runner.temp }}/ppa-source/*.tar.*
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Remove signing key and secret temporary files
+        if: always()
+        env:
+          GNUPGHOME: ${{ runner.temp }}/gnupg
+        run: |
+          set -u
+          gpgconf --kill all >/dev/null 2>&1 || true
+          rm -rf -- "$GNUPGHOME" "$RUNNER_TEMP/ppa-signer" || true
+          rm -f -- \
+            "$RUNNER_TEMP/launchpad-key.asc" \
+            "$RUNNER_TEMP/launchpad-passphrase" || true
