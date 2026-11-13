@@ -9,6 +9,12 @@ Requires KWin 6.7 or newer, including support for the KWin 6.8 painting API.
 Fedora, openSUSE, Arch and Ubuntu packages require the exact KWin version used to build the effect.
 A KWin update may be held until a compatible rebuild is available.
 
+## Demo
+
+[![Three hover cycles showing configurable panel dimming delays and fades](docs/demo/oled-panel-demo-60fps.gif)](docs/demo/oled-panel-demo-60fps.mp4)
+
+[Watch or download the MP4](docs/demo/oled-panel-demo-60fps.mp4) · 20 seconds, 1280×720, 60 fps.
+
 ## Install
 
 ### Fedora
