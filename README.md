@@ -4,11 +4,6 @@ Dims the Plasma panel brightness when idle independently of overall brightness s
 
 Hovering, touching, or clicking the panel restores full brightness instantly with a fast fade (unless configured to remain dimmed at all times).
 
-Requires KWin 6.7 or newer, including support for the KWin 6.8 painting API.
-
-Fedora, openSUSE, Arch and Ubuntu packages require the exact KWin version used to build the effect.
-A KWin update may be held until a compatible rebuild is available.
-
 ## Demo
 
 [![Three hover cycles showing configurable panel dimming delays and fades](docs/demo/oled-panel-demo-60fps.gif)](docs/demo/oled-panel-demo-60fps.mp4)
@@ -16,6 +11,8 @@ A KWin update may be held until a compatible rebuild is available.
 [Watch or download the MP4](docs/demo/oled-panel-demo-60fps.mp4) · 20 seconds, 1280×720, 60 fps.
 
 ## Install
+
+**Note:** Packages require the exact KWin version they were built against because KWin does not guarantee ABI compatibility for its effect API. Packages are rebuilt to track KWin updates in their target distributions, but a KWin update may be temporarily held back until a compatible rebuild is available.
 
 ### Fedora
 
