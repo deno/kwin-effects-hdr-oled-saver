@@ -10,10 +10,8 @@
     <param name="extract">kwin-effects-hdr-oled-saver.spec</param>
     <param name="extract">PKGBUILD</param>
   </service>
-  <service name="set_version">
-    <param name="file">kwin-effects-hdr-oled-saver.spec</param>
-    <param name="file">PKGBUILD</param>
-  </service>
+  <!-- Discover obs_scm's service-prefixed recipes, not bare filenames. -->
+  <service name="set_version"/>
   <service name="tar" mode="buildtime"/>
   <service name="recompress" mode="buildtime">
     <param name="file">*.tar</param>
