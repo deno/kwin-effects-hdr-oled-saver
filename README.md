@@ -14,7 +14,7 @@ Hovering, touching, or clicking the panel restores full brightness instantly wit
 
 **Note:** Packages require the exact KWin version they were built against because KWin does not guarantee ABI compatibility for its effect API. Packages are rebuilt to track KWin updates in their target distributions, but a KWin update may be temporarily held back until a compatible rebuild is available.
 
-### Fedora
+### Fedora Linux
 
 ```bash
 sudo dnf copr enable deno/kwin-effects-hdr-oled-saver
