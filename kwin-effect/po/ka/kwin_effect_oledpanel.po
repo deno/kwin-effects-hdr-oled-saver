@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: kwin-effects-hdr-oled-saver\n"
+"PO-Revision-Date: 2026-11-19 19:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ka\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Minimum brightness:"
+msgstr "მინიმალური სიკაშკაშე:"
+
+msgid " s"
+msgstr " წმ"
+
+msgid "Dim after:"
+msgstr "ჩაბნელება დროის შემდეგ:"
+
+msgid "Dimming time:"
+msgstr "ჩაბნელების ხანგრძლივობა:"
+
+msgid "Keep panel dimmed at all times"
+msgstr "პანელი ყოველთვის ჩაბნელებული იყოს"
+
+msgid "Do not restore full brightness when hovering, touching, or clicking panels."
+msgstr "არ აღდგეს სრული სიკაშკაშე პანელზე კურსორის გადატარების, შეხების ან დაწკაპუნებისას."
+
+msgctxt "@label internal monitor"
+msgid "Built-in Screen"
+msgstr "ჩაშენებული ეკრანი"
+
+msgctxt "@label unknown monitor"
+msgid "Monitor"
+msgstr "მონიტორი"
+
+msgctxt "%1 is a monitor name, %2 is its connector or identifier"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+msgid "All monitors"
+msgstr "ყველა მონიტორი"
+
+msgid "All HDR monitors"
+msgstr "ყველა HDR მონიტორი"
+
+msgid "Selected monitors"
+msgstr "არჩეული მონიტორები"
+
+msgid "Dim panels on:"
+msgstr "მონიტორები, რომლებზეც პანელები ჩაბნელდება:"
+
+msgid "Monitors to dim"
+msgstr "მონიტორები, რომლებზეც პანელები ჩაბნელდება"
+
+msgid "Select at least one monitor."
+msgstr "აირჩიეთ ერთი მონიტორი მაინც."
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disabled)"
+msgstr "%1 (გამორთულია)"
+
+msgctxt "@item monitor cannot be selected"
+msgid "%1 (no monitor identifier)"
+msgstr "%1 (მონიტორის იდენტიფიკატორი არ აქვს)"
+
+msgctxt "@item monitor with known identifier only"
+msgid "Monitor (%1)"
+msgstr "მონიტორი (%1)"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disconnected)"
+msgstr "%1 (მიერთებული არაა)"
+
+msgid "Finding connected monitors…"
+msgstr "მიერთებული მონიტორების ძებნა…"
+
+msgid "No connected monitors."
+msgstr "მიერთებული მონიტორები არ არის."
+
+msgid "Could not detect connected monitors."
+msgstr "მიერთებული მონიტორების აღმოჩენა ვერ მოხერხდა."
+
+msgctxt "@label minimum brightness percent"
+msgid "%1%"
+msgstr "%1%"

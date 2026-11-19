@@ -8,7 +8,7 @@ arch=('x86_64' 'aarch64')
 url="https://github.com/deno/kwin-effects-hdr-oled-saver"
 license=('GPL-2.0-or-later')
 depends=('qt6-base' 'qt6-declarative' 'libepoxy' 'libdrm' 'libkscreen' 'kwidgetsaddons')
-makedepends=('kwin>=6.7' 'cmake' 'extra-cmake-modules' 'ninja' 'vulkan-headers' 'kcmutils' 'kconfig' 'kcoreaddons' 'ki18n' 'kwindowsystem' 'wayland')
+makedepends=('kwin>=6.7' 'cmake' 'extra-cmake-modules' 'gettext' 'ninja' 'vulkan-headers' 'kcmutils' 'kconfig' 'kcoreaddons' 'ki18n' 'kwindowsystem' 'wayland')
 source=("${pkgname}-${pkgver}.tar.gz")
 sha256sums=('SKIP')
 

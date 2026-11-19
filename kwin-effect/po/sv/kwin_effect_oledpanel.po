@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: kwin-effects-hdr-oled-saver\n"
+"PO-Revision-Date: 2026-11-19 19:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "@label internal monitor"
+msgid "Built-in Screen"
+msgstr "Inbyggd bildskärm"
+
+msgctxt "@label unknown monitor"
+msgid "Monitor"
+msgstr "Bildskärm"
+
+msgctxt "%1 is a monitor name, %2 is its connector or identifier"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+msgid "Minimum brightness:"
+msgstr "Minimal ljusstyrka:"
+
+msgid " s"
+msgstr " s"
+
+msgid "Dim after:"
+msgstr "Dämpa efter:"
+
+msgid "Dimming time:"
+msgstr "Dämpningstid:"
+
+msgid "Keep panel dimmed at all times"
+msgstr "Håll panelen dämpad hela tiden"
+
+msgid "Do not restore full brightness when hovering, touching, or clicking panels."
+msgstr "Återställ inte full ljusstyrka när pekaren hålls över, eller när man vidrör eller klickar på paneler."
+
+msgid "All monitors"
+msgstr "Alla bildskärmar"
+
+msgid "All HDR monitors"
+msgstr "Alla HDR-bildskärmar"
+
+msgid "Selected monitors"
+msgstr "Valda bildskärmar"
+
+msgid "Dim panels on:"
+msgstr "Dämpa paneler på:"
+
+msgid "Monitors to dim"
+msgstr "Bildskärmar där panelerna ska dämpas"
+
+msgid "Select at least one monitor."
+msgstr "Välj minst en bildskärm."
+
+msgctxt "@label minimum brightness percent"
+msgid "%1%"
+msgstr "%1 %"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disabled)"
+msgstr "%1 (inaktiverad)"
+
+msgctxt "@item monitor cannot be selected"
+msgid "%1 (no monitor identifier)"
+msgstr "%1 (saknar bildskärmsidentifierare)"
+
+msgctxt "@item monitor with known identifier only"
+msgid "Monitor (%1)"
+msgstr "Bildskärm (%1)"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disconnected)"
+msgstr "%1 (frånkopplad)"
+
+msgid "Finding connected monitors…"
+msgstr "Söker efter anslutna bildskärmar…"
+
+msgid "No connected monitors."
+msgstr "Inga anslutna bildskärmar."
+
+msgid "Could not detect connected monitors."
+msgstr "Kunde inte identifiera anslutna bildskärmar."

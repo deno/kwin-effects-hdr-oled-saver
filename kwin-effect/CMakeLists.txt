@@ -40,6 +40,7 @@ target_link_libraries(oledpanel PRIVATE
 # User-local install: cmake -DCMAKE_INSTALL_PREFIX=$HOME/.local
 install(TARGETS oledpanel DESTINATION ${KDE_INSTALL_PLUGINDIR}/kwin/effects/plugins/)
 add_library(kwin_oledpanel_config MODULE config.cpp config.h)
+target_compile_definitions(kwin_oledpanel_config PRIVATE TRANSLATION_DOMAIN="kwin_effect_oledpanel")
 target_link_libraries(kwin_oledpanel_config PRIVATE
     oledpanel_settings
     KF6::ConfigCore
@@ -54,6 +55,8 @@ target_link_libraries(kwin_oledpanel_config PRIVATE
     Qt6::Widgets
 )
 
+ki18n_install(po)
+
 include(CTest)
 if(BUILD_TESTING)
     add_executable(oledpanel_transition_test tests/panelstate_test.cpp)
@@ -67,5 +70,21 @@ if(BUILD_TESTING)
         Qt6::Core
     )
     add_test(NAME oledpanel_transition_test COMMAND oledpanel_transition_test)
+    if(NOT KF_SKIP_PO_PROCESSING)
+        add_executable(oledpanel_translation_test tests/translation_test.cpp)
+        target_link_libraries(oledpanel_translation_test PRIVATE
+            KF6::CoreAddons
+            KF6::I18n
+            KF6::KCMUtils
+            Qt6::Widgets
+        )
+        add_dependencies(oledpanel_translation_test oledpanel kwin_oledpanel_config pofiles)
+        add_test(NAME oledpanel_translation_test COMMAND oledpanel_translation_test
+            $<TARGET_FILE:kwin_oledpanel_config>
+            $<TARGET_FILE:oledpanel>
+            ${CMAKE_CURRENT_BINARY_DIR}/locale
+        )
+        set_tests_properties(oledpanel_translation_test PROPERTIES SKIP_RETURN_CODE 77)
+    endif()
 endif()
 install(TARGETS kwin_oledpanel_config DESTINATION ${KDE_INSTALL_PLUGINDIR}/kwin/effects/configs/)

@@ -26,6 +26,7 @@ BuildRequires:  cmake(Qt6Qml)
 BuildRequires:  cmake(Qt6Quick)
 BuildRequires:  extra-cmake-modules
 BuildRequires:  gcc-c++
+BuildRequires:  gettext
 BuildRequires:  kf6-kcmutils-devel
 BuildRequires:  kf6-kconfig-devel
 BuildRequires:  kf6-kcoreaddons-devel
@@ -65,11 +66,12 @@ cmake --build %{_builddir}/build
 
 %install
 DESTDIR=%{buildroot} cmake --install %{_builddir}/build
+%find_lang kwin_effect_oledpanel
 
 %check
 ctest --test-dir %{_builddir}/build --output-on-failure
 
-%files
+%files -f kwin_effect_oledpanel.lang
 %dir %{plugindir}/kwin
 %dir %{plugindir}/kwin/effects
 %dir %{plugindir}/kwin/effects/configs

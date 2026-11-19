@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: kwin-effects-hdr-oled-saver\n"
+"PO-Revision-Date: 2026-11-19 19:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgctxt "@label internal monitor"
+msgid "Built-in Screen"
+msgstr "الشاشة المدمجة"
+
+msgctxt "@label unknown monitor"
+msgid "Monitor"
+msgstr "شاشة"
+
+msgctxt "%1 is a monitor name, %2 is its connector or identifier"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+msgid "Minimum brightness:"
+msgstr "السطوع الأدنى:"
+
+msgid " s"
+msgstr " ث"
+
+msgid "Dim after:"
+msgstr "خفّض السطوع بعد:"
+
+msgid "Dimming time:"
+msgstr "مدة خفض السطوع:"
+
+msgid "Keep panel dimmed at all times"
+msgstr "أبقِ اللوحة خافتة السطوع دائمًا"
+
+msgid "Do not restore full brightness when hovering, touching, or clicking panels."
+msgstr "لا تستعد السطوع الكامل عند تحويم المؤشر فوق اللوحات أو لمسها أو النقر عليها."
+
+msgid "All monitors"
+msgstr "كل الشاشات"
+
+msgid "All HDR monitors"
+msgstr "كل شاشات HDR"
+
+msgid "Selected monitors"
+msgstr "الشاشات المحددة"
+
+msgid "Dim panels on:"
+msgstr "خفّض سطوع اللوحات على:"
+
+msgid "Monitors to dim"
+msgstr "الشاشات المراد خفض سطوع لوحاتها"
+
+msgid "Select at least one monitor."
+msgstr "حدّد شاشة واحدة على الأقل."
+
+msgctxt "@label minimum brightness percent"
+msgid "%1%"
+msgstr "%1%"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disabled)"
+msgstr "%1 (معطّلة)"
+
+msgctxt "@item monitor cannot be selected"
+msgid "%1 (no monitor identifier)"
+msgstr "%1 (بلا معرّف للشاشة)"
+
+msgctxt "@item monitor with known identifier only"
+msgid "Monitor (%1)"
+msgstr "شاشة (%1)"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disconnected)"
+msgstr "%1 (غير متصلة)"
+
+msgid "Finding connected monitors…"
+msgstr "جارٍ البحث عن الشاشات المتصلة…"
+
+msgid "No connected monitors."
+msgstr "لا توجد شاشات متصلة."
+
+msgid "Could not detect connected monitors."
+msgstr "تعذّر اكتشاف الشاشات المتصلة."

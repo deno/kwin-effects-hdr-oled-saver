@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: kwin-effects-hdr-oled-saver\n"
+"PO-Revision-Date: 2026-11-19 19:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+msgid "Minimum brightness:"
+msgstr "Минимальная яркость:"
+
+msgid " s"
+msgstr " с"
+
+msgid "Dim after:"
+msgstr "Затемнять через:"
+
+msgid "Dimming time:"
+msgstr "Время затемнения:"
+
+msgid "Keep panel dimmed at all times"
+msgstr "Всегда затемнять панель"
+
+msgid "Do not restore full brightness when hovering, touching, or clicking panels."
+msgstr "Не восстанавливать полную яркость при наведении указателя, касании или щелчке по панели."
+
+msgctxt "@label minimum brightness percent"
+msgid "%1%"
+msgstr "%1%"
+
+msgctxt "@label internal monitor"
+msgid "Built-in Screen"
+msgstr "Встроенный экран"
+
+msgctxt "@label unknown monitor"
+msgid "Monitor"
+msgstr "Монитор"
+
+msgctxt "%1 is a monitor name, %2 is its connector or identifier"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+msgid "All monitors"
+msgstr "Все мониторы"
+
+msgid "All HDR monitors"
+msgstr "Все HDR-мониторы"
+
+msgid "Selected monitors"
+msgstr "Выбранные мониторы"
+
+msgid "Dim panels on:"
+msgstr "Мониторы для затемнения панелей:"
+
+msgid "Monitors to dim"
+msgstr "Мониторы для затемнения панелей"
+
+msgid "Select at least one monitor."
+msgstr "Выберите хотя бы один монитор."
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disabled)"
+msgstr "%1 (выключен)"
+
+msgctxt "@item monitor cannot be selected"
+msgid "%1 (no monitor identifier)"
+msgstr "%1 (нет идентификатора монитора)"
+
+msgctxt "@item monitor with known identifier only"
+msgid "Monitor (%1)"
+msgstr "Монитор (%1)"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disconnected)"
+msgstr "%1 (не подключён)"
+
+msgid "Finding connected monitors…"
+msgstr "Поиск подключённых мониторов…"
+
+msgid "No connected monitors."
+msgstr "Нет подключённых мониторов."
+
+msgid "Could not detect connected monitors."
+msgstr "Не удалось обнаружить подключённые мониторы."

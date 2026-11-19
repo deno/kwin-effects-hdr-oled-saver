@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: kwin-effects-hdr-oled-saver\n"
+"PO-Revision-Date: 2026-11-19 19:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgctxt "@label internal monitor"
+msgid "Built-in Screen"
+msgstr "Yerleşik ekran"
+
+msgctxt "@label unknown monitor"
+msgid "Monitor"
+msgstr "Ekran"
+
+msgctxt "%1 is a monitor name, %2 is its connector or identifier"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+msgid "Minimum brightness:"
+msgstr "En düşük parlaklık:"
+
+msgid " s"
+msgstr " sn"
+
+msgid "Dim after:"
+msgstr "Şu süreden sonra karart:"
+
+msgid "Dimming time:"
+msgstr "Karartma süresi:"
+
+msgid "Keep panel dimmed at all times"
+msgstr "Paneli her zaman karartılmış tut"
+
+msgid "Do not restore full brightness when hovering, touching, or clicking panels."
+msgstr "Panellerin üzerine gelindiğinde, panellere dokunulduğunda veya tıklandığında tam parlaklığı geri yükleme."
+
+msgid "All monitors"
+msgstr "Tüm ekranlar"
+
+msgid "All HDR monitors"
+msgstr "Tüm HDR ekranlar"
+
+msgid "Selected monitors"
+msgstr "Seçili ekranlar"
+
+msgid "Dim panels on:"
+msgstr "Panellerin karartılacağı ekranlar:"
+
+msgid "Monitors to dim"
+msgstr "Panellerin karartılacağı ekranlar"
+
+msgid "Select at least one monitor."
+msgstr "En az bir ekran seçin."
+
+msgctxt "@label minimum brightness percent"
+msgid "%1%"
+msgstr "%%1"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disabled)"
+msgstr "%1 (devre dışı)"
+
+msgctxt "@item monitor cannot be selected"
+msgid "%1 (no monitor identifier)"
+msgstr "%1 (ekran tanımlayıcısı yok)"
+
+msgctxt "@item monitor with known identifier only"
+msgid "Monitor (%1)"
+msgstr "Ekran (%1)"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disconnected)"
+msgstr "%1 (bağlı değil)"
+
+msgid "Finding connected monitors…"
+msgstr "Bağlı ekranlar aranıyor…"
+
+msgid "No connected monitors."
+msgstr "Bağlı ekran yok."
+
+msgid "Could not detect connected monitors."
+msgstr "Bağlı ekranlar algılanamadı."

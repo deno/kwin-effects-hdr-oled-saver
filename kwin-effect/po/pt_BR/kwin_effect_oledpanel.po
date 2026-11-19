@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: kwin-effects-hdr-oled-saver\n"
+"PO-Revision-Date: 2026-11-19 19:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Minimum brightness:"
+msgstr "Brilho mínimo:"
+
+msgid " s"
+msgstr " s"
+
+msgid "Dim after:"
+msgstr "Reduzir o brilho após:"
+
+msgid "Dimming time:"
+msgstr "Tempo de redução do brilho:"
+
+msgid "Keep panel dimmed at all times"
+msgstr "Manter o painel com brilho reduzido o tempo todo"
+
+msgid "Do not restore full brightness when hovering, touching, or clicking panels."
+msgstr "Não restaurar o brilho máximo ao passar o cursor, tocar ou clicar nos painéis."
+
+msgctxt "@label internal monitor"
+msgid "Built-in Screen"
+msgstr "Tela integrada"
+
+msgctxt "@label unknown monitor"
+msgid "Monitor"
+msgstr "Monitor"
+
+msgctxt "%1 is a monitor name, %2 is its connector or identifier"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+msgid "All monitors"
+msgstr "Todos os monitores"
+
+msgid "All HDR monitors"
+msgstr "Todos os monitores HDR"
+
+msgid "Selected monitors"
+msgstr "Monitores selecionados"
+
+msgid "Dim panels on:"
+msgstr "Reduzir o brilho dos painéis em:"
+
+msgid "Monitors to dim"
+msgstr "Monitores nos quais reduzir o brilho dos painéis"
+
+msgid "Select at least one monitor."
+msgstr "Selecione pelo menos um monitor."
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disabled)"
+msgstr "%1 (desativado)"
+
+msgctxt "@item monitor cannot be selected"
+msgid "%1 (no monitor identifier)"
+msgstr "%1 (sem identificador de monitor)"
+
+msgctxt "@item monitor with known identifier only"
+msgid "Monitor (%1)"
+msgstr "Monitor (%1)"
+
+msgctxt "@item monitor name and status"
+msgid "%1 (disconnected)"
+msgstr "%1 (desconectado)"
+
+msgid "Finding connected monitors…"
+msgstr "Procurando monitores conectados…"
+
+msgid "No connected monitors."
+msgstr "Nenhum monitor conectado."
+
+msgid "Could not detect connected monitors."
+msgstr "Não foi possível detectar os monitores conectados."
+
+msgctxt "@label minimum brightness percent"
+msgid "%1%"
+msgstr "%1%"
