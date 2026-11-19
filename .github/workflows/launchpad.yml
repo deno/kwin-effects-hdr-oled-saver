@@ -94,8 +94,32 @@ jobs:
       - name: Build unsigned source package
         run: |
           set -euo pipefail
-          bash scripts/build-ppa-source.sh \
-            "$PPA_VERSION" "$PPA_REVISION" "$RUNNER_TEMP/ppa-source"
+          test "$RELEASE_TAG" = v0.10.0
+          test "$PPA_REVISION" -ge 2
+          test "$(git rev-parse HEAD)" = 3d98c6d5c9d3423302afd758200b617e0322b34e
+          package=kwin-effects-hdr-oled-saver
+          upload="$RUNNER_TEMP/ppa-source"
+          mkdir "$upload"
+          cd "$upload"
+          orig="${package}_${PPA_VERSION}.orig.tar.gz"
+          base="https://launchpad.net/~denopl/+archive/ubuntu/$package/+sourcefiles/$package"
+          curl -fsSL --retry 3 "$base/0.10.0-1ppa1~ubuntu26.10.1/$orig" -o "$orig"
+          echo "77261e6c4cd2f6ef4cb70f814fea47ff0389cfe6b5b65b535b8e7cbf086a4180  $orig" | sha256sum -c -
+          tar -xzf "$orig"
+          cd "$package-$PPA_VERSION"
+          cp -a "$GITHUB_WORKSPACE/debian" debian
+          mkdir -p debian/patches
+          diff -u --label a/README.md --label b/README.md README.md "$GITHUB_WORKSPACE/README.md" \
+            > debian/patches/release-readme.patch || test "$?" = 1
+          echo release-readme.patch > debian/patches/series
+          dpkg-source --before-build .
+          mkdir "$RUNNER_TEMP/expected"
+          git -C "$GITHUB_WORKSPACE" archive HEAD -- . ':(exclude)debian' ':(exclude).github' ':(exclude).obs' \
+            | tar -xf - -C "$RUNNER_TEMP/expected"
+          diff -qr --exclude=.pc --exclude=debian "$RUNNER_TEMP/expected" .
+          dch --maintmaint --newversion "$PPA_VERSION-1ppa$PPA_REVISION~ubuntu26.10.1" \
+            --distribution stonking --force-distribution "Match the README in the corrected v0.10.0 release."
+          dpkg-buildpackage -S -d -nc -us -uc -sd
 
       - name: Import PPA signing key
         env:
