@@ -10,6 +10,14 @@ Hovering, touching, or clicking the panel restores full brightness instantly wit
 
 [Watch or download the MP4](docs/demo/oled-panel-demo-60fps.mp4) · 20 seconds, 1280×720, 60 fps.
 
+## Screenshots
+
+![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-dark.png#gh-dark-mode-only)
+![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-light.png#gh-light-mode-only)
+
+![Effect settings](docs/screenshots/effect-settings-dark.png#gh-dark-mode-only)
+![Effect settings](docs/screenshots/effect-settings-light.png#gh-light-mode-only)
+
 ## Install
 
 **Note:** Packages require the exact KWin version they were built against because KWin does not guarantee ABI compatibility for its effect API. Packages are rebuilt to track KWin updates in their target distributions, but a KWin update may be temporarily held back until a compatible rebuild is available.
@@ -80,11 +88,3 @@ provide KWin 6.7.0 or newer.
 Enable the effect in System Settings under Desktop Effects.
 
 Restart KWin (`kwin_wayland --replace & disown`) or logout & login from the KDE desktop so the effect loads.
-
-## Screenshots
-
-![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-dark.png#gh-dark-mode-only)
-![Effect entry in Desktop Effects](docs/screenshots/desktop-effects-light.png#gh-light-mode-only)
-
-![Effect settings](docs/screenshots/effect-settings-dark.png#gh-dark-mode-only)
-![Effect settings](docs/screenshots/effect-settings-light.png#gh-light-mode-only)
