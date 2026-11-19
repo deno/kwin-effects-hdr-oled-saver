@@ -1,5 +1,5 @@
 Name:           kwin-effects-hdr-oled-saver
-Version:        0.10.0
+Version:        0.10.1
 Release:        1%{?dist}
 Summary:        Dims the Plasma panel brightness when idle to prevent OLED burn-in
 URL:            https://github.com/deno/kwin-effects-hdr-oled-saver
@@ -40,7 +40,7 @@ BuildRequires:  wayland-devel
 # KWin's effect factory IID includes the exact version used to build the plugin.
 %if 0%{?suse_version}
 Requires:       kwin6 = %{pkg_version cmake(KWin)}
-%else
+%elif %{defined _kwin_version}
 Requires:       kwin%{?_isa} = %{_kwin_version}
 %endif
 
@@ -67,6 +67,11 @@ cmake --build %{_builddir}/build
 %install
 DESTDIR=%{buildroot} cmake --install %{_builddir}/build
 %find_lang kwin_effect_oledpanel
+%if !0%{?suse_version} && %{undefined _kwin_version}
+# Fedora 43 lacks the KWin macro.
+kwin_version=$(rpm -q --qf '%%{VERSION}' kwin-devel.%{_target_cpu})
+printf 'Requires: kwin%{?_isa} = %%s\n' "$kwin_version" > "$RPM_SPECPARTS_DIR/kwin-abi.specpart"
+%endif
 
 %check
 ctest --test-dir %{_builddir}/build --output-on-failure
@@ -82,6 +87,8 @@ ctest --test-dir %{_builddir}/build --output-on-failure
 %doc README.md
 
 %changelog
+* Thu Nov 19 2026 deno - 0.10.1-1
+- Fix the exact KWin runtime dependency when building on Fedora 43.
 * Thu Nov 19 2026 deno - 0.10.0-1
 - Add per-monitor dimming with live display discovery and selection.
 - Translate the effect and its settings into 16 locales.

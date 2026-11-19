@@ -1,3 +1,9 @@
+kwin-effects-hdr-oled-saver (0.10.1-1) stonking; urgency=medium
+
+  * New upstream patch release fixing the Fedora 43 KWin dependency.
+
+ -- deno <deno@users.noreply.github.com>  Thu, 19 Nov 2026 21:01:00 +0100
+
 kwin-effects-hdr-oled-saver (0.10.0-1) stonking; urgency=medium
 
   * Add per-monitor dimming with live display discovery and selection.
