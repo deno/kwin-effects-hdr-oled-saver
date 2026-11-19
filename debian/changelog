@@ -1,3 +1,10 @@
+kwin-effects-hdr-oled-saver (0.10.0-1) stonking; urgency=medium
+
+  * Add per-monitor dimming with live display discovery and selection.
+  * Translate the effect and its settings into 16 locales.
+
+ -- deno <deno@users.noreply.github.com>  Thu, 19 Nov 2026 20:31:35 +0100
+
 kwin-effects-hdr-oled-saver (0.9.4-1) stonking; urgency=medium
 
   * Initial Debian packaging for Ubuntu 26.10 (Stonking).
