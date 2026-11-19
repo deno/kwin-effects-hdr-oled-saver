@@ -6,9 +6,13 @@ Hovering, touching, or clicking the panel restores full brightness instantly wit
 
 ## Demo
 
-[![Three hover cycles showing configurable panel dimming delays and fades](docs/demo/oled-panel-demo-60fps.gif)](docs/demo/oled-panel-demo-60fps.mp4)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/demo/oled-panel-demo-dark-60fps.gif">
+  <source media="(prefers-color-scheme: light)" srcset="docs/demo/oled-panel-demo-60fps.gif">
+  <img alt="Three hover cycles showing panel dimming delays and fades" src="docs/demo/oled-panel-demo-60fps.gif">
+</picture>
 
-[Watch or download the MP4](docs/demo/oled-panel-demo-60fps.mp4) · 20 seconds, 1280×720, 60 fps.
+Watch or download the MP4: [Dark](docs/demo/oled-panel-demo-dark-60fps.mp4) · [Light](docs/demo/oled-panel-demo-60fps.mp4). Both are 20 seconds, 1280×720, 60 fps.
 
 ## Screenshots
 
