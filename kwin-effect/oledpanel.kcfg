@@ -19,9 +19,15 @@
       <min>0</min>
       <max>300000</max>
     </entry>
-    <entry name="HdrOnly" type="Bool">
-      <default>true</default>
+    <entry name="MonitorMode" type="Enum">
+      <choices>
+        <choice name="All"/>
+        <choice name="Hdr"/>
+        <choice name="Selected"/>
+      </choices>
+      <default>Hdr</default>
     </entry>
+    <entry name="SelectedMonitors" type="StringList"/>
     <entry name="AlwaysDim" type="Bool">
       <default>false</default>
     </entry>

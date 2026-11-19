@@ -19,6 +19,8 @@ BuildRequires:  ninja-build
 %endif
 BuildRequires:  cmake
 BuildRequires:  cmake(KWin) >= 6.7
+BuildRequires:  cmake(KF6Screen) >= 6.7
+BuildRequires:  cmake(KF6WidgetsAddons)
 BuildRequires:  cmake(Qt6Core)
 BuildRequires:  cmake(Qt6Qml)
 BuildRequires:  cmake(Qt6Quick)
@@ -46,10 +48,10 @@ Dims the Plasma panel brightness when idle independently of overall
 brightness settings to prevent OLED burn-in. Works best in HDR mode.
 
 Hovering, touching, or clicking the panel restores full brightness
-instantly (unless configured to remain dimmed at all times). Panels on
-SDR displays can be excluded via the "Only affect HDR outputs" option
-(enabled by default). Settings live in System Settings under Desktop
-Effects (minimum brightness, idle delay, dimming time).
+instantly (unless configured to remain dimmed at all times). The effect
+can target all monitors, monitors with HDR enabled (the default), or
+individually selected monitors. Settings live in System Settings under
+Desktop Effects (minimum brightness, idle delay, dimming time).
 
 %prep
 %autosetup -n %{name}-%{version}

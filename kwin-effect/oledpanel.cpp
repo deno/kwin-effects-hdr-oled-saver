@@ -3,6 +3,8 @@
 
 #include "oledpanel.h"
 
+#include "monitormode.h"
+
 #include <KPluginFactory>
 
 #include <core/backendoutput.h>
@@ -74,7 +76,9 @@ void OledPanelEffect::reconfigure(ReconfigureFlags /*flags*/)
     m_dimFactor = m_settings.dimFactor();
     m_timeoutMs = m_settings.timeoutMs();
     m_fadeMs = m_settings.fadeMs();
-    m_hdrOnly = m_settings.hdrOnly();
+    m_monitorMode = effectiveMonitorMode(m_settings);
+    m_selectedMonitors = m_monitorMode == OledPanelSettings::EnumMonitorMode::Selected
+        ? m_settings.selectedMonitors() : QStringList{};
     m_alwaysDim = m_settings.alwaysDim();
 
     for (auto it = m_panels.begin(); it != m_panels.end(); ++it) {
@@ -109,11 +113,26 @@ bool OledPanelEffect::isPanel(const EffectWindow *w)
         && w->windowClass().contains(QLatin1String("plasmashell"));
 }
 
-bool OledPanelEffect::isHdrOutput(const EffectWindow *w)
+bool OledPanelEffect::isOutputEligible(const EffectWindow *w) const
 {
-    const LogicalOutput *screen = w ? w->screen() : nullptr;
+    using Mode = OledPanelSettings::EnumMonitorMode;
+    if (m_monitorMode == Mode::All) {
+        return true;
+    }
+    if (m_monitorMode == Mode::Selected && m_selectedMonitors.isEmpty()) {
+        return false;
+    }
+
+    const LogicalOutput *screen = w->screen();
     const BackendOutput *backend = screen ? screen->backendOutput() : nullptr;
-    return backend && backend->highDynamicRange();
+    if (!backend) {
+        return false;
+    }
+    if (m_monitorMode == Mode::Selected) {
+        const QString uuid = backend->uuid();
+        return !uuid.isEmpty() && m_selectedMonitors.contains(uuid);
+    }
+    return backend->highDynamicRange();
 }
 
 bool OledPanelEffect::hasInput(const EffectWindow *w) const
@@ -132,22 +151,9 @@ bool OledPanelEffect::hasInput(const EffectWindow *w) const
 
 bool OledPanelEffect::shouldDim(EffectWindow *w, const PanelState &state, qint64 now) const
 {
-    if (state.closedBrightness || !isPanel(w)) {
-        return false;
-    }
-    if (m_hdrOnly && !isHdrOutput(w)) {
-        return false;
-    }
-    if (m_alwaysDim) {
-        return true;
-    }
-    if (state.inputActive) {
-        return false;
-    }
-    if (now - state.lastInteraction < m_timeoutMs) {
-        return false;
-    }
-    return true;
+    return !state.closedBrightness
+        && (m_alwaysDim || (!state.inputActive && now - state.lastInteraction >= m_timeoutMs))
+        && isPanel(w) && isOutputEligible(w);
 }
 
 void OledPanelEffect::updatePanels()
@@ -188,12 +194,12 @@ void OledPanelEffect::ensureWake()
         for (auto it = m_panels.cbegin(); it != m_panels.cend(); ++it) {
             EffectWindow *w = it.key();
             const PanelState &state = it.value();
-            if (state.closedBrightness || state.inputActive || (m_hdrOnly && !isHdrOutput(w))) {
+            if (state.closedBrightness || state.inputActive) {
                 continue;
             }
             const qint64 deadline = state.lastInteraction + m_timeoutMs;
-            if (deadline > now) {
-                nearest = std::min(nearest, deadline);
+            if (deadline > now && deadline < nearest && isOutputEligible(w)) {
+                nearest = deadline;
             }
         }
     }
@@ -278,6 +284,8 @@ void OledPanelEffect::onScreenAdded(LogicalOutput *screen)
     connections.append(connect(screen, &LogicalOutput::changed, this, &OledPanelEffect::updatePanels));
     if (BackendOutput *backend = screen->backendOutput()) {
         connections.append(connect(backend, &BackendOutput::highDynamicRangeChanged,
+                                   this, &OledPanelEffect::updatePanels));
+        connections.append(connect(backend, &BackendOutput::uuidChanged,
                                    this, &OledPanelEffect::updatePanels));
     }
     connections.append(connect(screen, &QObject::destroyed, this, [this, screen] {

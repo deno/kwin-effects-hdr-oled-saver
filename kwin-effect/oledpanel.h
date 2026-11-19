@@ -12,6 +12,7 @@
 #include <QList>
 #include <QMetaObject>
 #include <QPointF>
+#include <QStringList>
 #include <QTimer>
 
 #include <algorithm>
@@ -96,7 +97,7 @@ private Q_SLOTS:
 
 private:
     static bool isPanel(const EffectWindow *w);
-    static bool isHdrOutput(const EffectWindow *w);
+    bool isOutputEligible(const EffectWindow *w) const;
     bool shouldDim(EffectWindow *w, const PanelState &state, qint64 now) const;
     bool hasInput(const EffectWindow *w) const;
     void updatePanels();
@@ -104,6 +105,7 @@ private:
     static void disconnectWindowCallbacks(PanelState &state);
 
     OledPanelSettings m_settings;
+    QStringList m_selectedMonitors;
     QTimer m_idleTimer;
     QElapsedTimer m_sinceBoot;
     QHash<EffectWindow *, PanelState> m_panels;
@@ -113,7 +115,7 @@ private:
     qreal m_dimFactor;
     int m_timeoutMs;
     int m_fadeMs;
-    bool m_hdrOnly;
+    int m_monitorMode;
     bool m_alwaysDim;
     qint64 m_wakeAt = 0;
 };

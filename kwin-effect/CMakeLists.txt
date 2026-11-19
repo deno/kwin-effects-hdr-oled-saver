@@ -12,7 +12,8 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 find_package(Qt6 REQUIRED COMPONENTS Core DBus Gui Widgets)
 find_package(KWin 6.7 REQUIRED)
-find_package(KF6 REQUIRED COMPONENTS Config CoreAddons I18n KCMUtils)
+find_package(KF6 REQUIRED COMPONENTS Config CoreAddons I18n KCMUtils WidgetsAddons)
+find_package(KF6Screen 6.7 REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -45,6 +46,8 @@ target_link_libraries(kwin_oledpanel_config PRIVATE
     KF6::CoreAddons
     KF6::I18n
     KF6::KCMUtils
+    KF6::Screen
+    KF6::WidgetsAddons
     Qt6::Core
     Qt6::DBus
     Qt6::Gui
