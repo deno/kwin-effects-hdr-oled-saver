@@ -4,6 +4,10 @@
   <description>Versioned release builds branched from home:deno_ by the tag_push SCM/CI workflow.</description>
   <person userid="deno_" role="bugowner" />
   <person userid="deno_" role="maintainer" />
+  <!-- Re-enable Leap when its standard repository provides KWin >= 6.7. -->
+  <build>
+    <disable repository="openSUSE_Leap_16.1" />
+  </build>
   <repository name="openSUSE_Tumbleweed">
     <path project="openSUSE:Tumbleweed" repository="standard" />
     <arch>i586</arch>

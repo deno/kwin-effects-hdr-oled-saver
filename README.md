@@ -72,7 +72,8 @@ sudo apt install kwin-effects-hdr-oled-saver
 
 ### openSUSE Leap
 
-Support planned for Leap 16.1 (requires KWin $\ge$ 6.7.0).
+OBS release builds for Leap 16.1 are disabled until its standard repositories
+provide KWin 6.7.0 or newer.
 
 ## Running
 
